@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+
+<html class="noteboard">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Jjot</title>
+  </title>
+
+  <link rel="icon" href="/images/favicon.png" type="images/png" />
+
+  <script type="text/javascript">
+    var beganLoading = (new Date()).getTime();
+  </script>
+
+  <link rel="stylesheet" href="compiled/all_min.css" type="text/css" media="screen" />
+
+  <!--[if lt IE 8.]>
+      <link rel="stylesheet" href="stylesheets/ie.css" type="text/css" media="screen" />
+      <%= css_include("ie.css") %>
+  <![endif]-->
+  <!--[if lt IE 7.]>
+      <link rel="stylesheet" href="stylesheets/ie6.css" type="text/css" media="screen" />
+  <![endif]-->
+
+
+    <style>
+    /*
+    * link image style
+    */
+
+    #cybernet{
+        width: 200px;
+        height: 49px;
+        background: transparent url(/images/buzz/buzz.gif) no-repeat 0 0px;
+    }
+    #espace{
+        width: 200px;
+        height: 49px;
+        background: transparent url(/images/buzz/buzz.gif) no-repeat 0 -49px;
+    }
+    #geeksugar{
+        width: 200px;
+        height: 48px;
+        background: transparent url(/images/buzz/buzz.gif) no-repeat 0 -98px;
+    }
+    #genbeta{
+        width: 200px;
+        height: 48px;
+        background: transparent url(/images/buzz/buzz.gif) no-repeat 0 -146px;
+    }
+    #jeffro{
+        width: 200px;
+        height: 48px;
+        background: transparent url(/images/buzz/buzz.gif) no-repeat 0 -194px;
+    }
+    #lifehacker{
+        width: 200px;
+        height: 48px;
+        background: transparent url(/images/buzz/buzz.gif) no-repeat 0 -242px;
+    }
+    #makeuseof{
+        width: 200px;
+        height: 48px;
+        background: transparent url(/images/buzz/buzz.gif) no-repeat 0 -290px;
+    }
+    #svm{
+        width: 200px;
+        height: 53px;
+        background: transparent url(/images/buzz/buzz.gif) no-repeat 0 -338px;
+    }
+
+
+    /*
+    * show buzz links hanging off the right side
+    */
+    #copy-body{
+      position:relative;
+    }
+    #buzz{
+      position:absolute;
+      right:-285px;
+      width:250px;
+    }
+    #buzz a{
+      width:200px;
+      display:block;
+      margin:2px;
+      border:2px solid #DDD;
+    }
+    #buzz a:hover{
+      border:2px solid #ababab;
+    }
+    #buzz a.translate, #buzz a.translate:hover{
+      width:200px;
+      text-align:center;
+      border:0;
+      margin:0;
+    }
+    .buzzbutton{
+
+      width:200px;
+    }
+    blockquote {
+      quotes: "\201C" "\201D";
+    }
+    blockquote{
+      font-size:90%;
+      margin:0;
+      color:#666;
+      margin-bottom:9px;
+      width:250px;
+    }
+    blockquote:before { content: open-quote; font-weight: bold; }
+    blockquote:after { content: close-quote; font-weight: bold; }
+
+    /*
+    * Some IE6 fixes
+    */
+    * html #copy-body{
+      width:550px;
+    }
+    *html #buzz h2{
+      margin-left:0;
+    }
+    </style>
+  </script>
+
+</head>
+
+
+<body>
+  <div id="header-links">
+    <div>
+      <span id="account-links">
+          <!-- <a href="#" id="sign-up">Free sign up</a>&nbsp;&nbsp;&nbsp; -->
+          <!-- <a href="#" id="sign-in">Sign in</a> -->
+
+      </span>
+
+      <span id="save-status"></span>
+    </div>
+  </div>
+
+  <div id="header">
+    <div id="top-half-padding">
+      <div id="top-half">
+        <h1><a href="/" title="Jjot - Take notes online, fast." class="no-focus-lines">Jjot</a></h1>
+        <div id="controls">
+
+
+
+
+          <!-- <%= yield :header %> -->
+
+
+
+        </div>
+      </div>
+    </div>
+    <div id="messages-box">
+      <div class="left-corner"><div class="right-corner"><div class="center">
+        <div id="status-message"></div>
+        <div id="search-message"></div>
+      </div></div></div>
+    </div>
+    <!-- <div id="white-fade"></div> -->
+
+  </div>
+
+
+  <div id="spacer"></div>
+  <div id="page-links">
+  </div>
+
+
+  <div id="content">
+    <div id="note-scroll">
+
+      <div id="sidebar">
+
+        <div id="sidebar-footer">
+          <a id="keyboard-shortcuts" href="#" onclick="Page.showKeyboardShortcuts();return false;">Keyboard shortcuts</a><br/>
+
+          <a href="./about.html" title="Learn more">About</a>
+
+          <br/>
+
+          &copy;<span id="copyright" style="margin-right:0">2008</span> Jjot
+        </div>
+
+      </div>
+
+      <div id="copy-body" class="copy narrow-copy">
+        <div id="buzz">
+          <h2>News &amp; reviews</h2>
+
+          <a href="http://lifehacker.com/software/note-taking/take-quick-notes-with-jjot-283337.php"
+          title='Take quick notes with Jjot' id="lifehacker"></a>
+
+          <blockquote>a lightning fast sticky note web application filled with smart features</blockquote>
+
+          <a href="http://tech.cybernetnews.com/2007/08/01/jjot-online-note-taking-made-simple/"
+          title='Jjot - "Online note taking made simple"' id="cybernet" ></a>
+          <blockquote>online note taking made simple</blockquote>
+
+          <a href="http://geeksugar.com/463354"
+          title='Geek Sugar' id="geeksugar" ></a>
+          <blockquote>your online sticky notes guru</blockquote>
+
+          <a href="http://www.jeffro2pt0.com/jjot-review-take-notes-in-a-flash/"
+          title='Jeffro2pt0' id="jeffro" ></a>
+          <blockquote>it may be the easiest way to take notes online</blockquote>
+
+          <a href="http://www.svmlemag.fr/actu/01626/jjot"
+          title='svm' id="svm" ></a>
+          <a href="http://www.google.com/translate?u=http%3A%2F%2Fwww.svmlemag.fr%2Factu%2F01626%2Fjjot&langpair=fr%7Cen&hl=en&ie=UTF8"
+          class="translate">Translate to English</a>
+          <blockquote>a new competitor for Google Notebook</blockquote>
+
+
+          <a href="http://www.makeuseof.com/dir/jjot/"
+          title='Makeuseof' id="makeuseof" ></a>
+          <blockquote>cool-looking and easy-to-use service</blockquote>
+
+
+        </div>
+        <h2 >About us</h2>
+        <h3>What is this?</h3>
+        <p>
+          <img src="/images/copy/about-notes.gif" style="float:right;margin-left:6px"/>
+        Jjot is a simple, lightweight website for jotting down notes. You can use it to take down class or meeting notes, reminders, or Internet research. You can access your notes from any computer by visiting jjot.com, and easily share and email notes to other people.
+        </p>
+
+        <h3>Who's behind it?</h3>
+        <p>
+          Jjot is founded by <a href="http://philc.co">Phil Crosby</a> and David Renie. The Jjot team likes to build software that's wicked fast and dead simple to use.</p>
+      <p>
+        Jjot was designed and built to be as straight forward as possible. There's no extra junk to think about: it looks like a page of paper notes, and does exactly what you'd expect -- you can write stuff down in them. The team spent an obsessive amount of time making sure it was both rich and fast. Life is short; there's no time to waste on slow applications.
+        </p>
+
+
+        <h3>Jjot is built on advanced ninja technologies</h3>
+
+        <p>Here are two of them:</p>
+
+        <ul>
+
+          <li>A slim, powerful, dairy-driven Javascript framework called <a href="http://mootools.net/">Mootools</a>. </li>
+
+          <li>Amazon's giant computer network (<a href="http://aws.amazon.com/ec2">EC2</a> &
+            <a href="http://aws.amazon.com/s3">S3</a>).</li>
+
+
+        </ul>
+
+        <h3>Contact</h3>
+
+        <p>
+        Please email us about feedback, questions, bugs, teaming up, investment, or just tell us your favorite animal.<br/>
+        <a style="font-size:larger" title="Contact jjot.com" href="mailto:contact@jjot.com">contact@jjot.com</a>
+        </p>
+
+
+
+    </div>
+
+    </div>
+
+  </div>
+
+
+  </div>
+
+  <div id="debug-panel" style="display:none">
+    <div style="position:relative">
+      <a href="#" class="close" onclick="return Debug.close();">X</a>
+      <div id="debug-tabs">
+      </div>
+
+      <div id="debug-options" style="display:none">
+        <a href="#" id="hide-debug-options">&gt;</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="dialogs">
+
+    <div id="signup-panel" class="dialog signin-panel" style="display:none" >
+      <div class="contents">
+        <a href="#" class="x"></a>
+
+        <h3>Sign up</h3>
+        <form action="#" id="signup-form" method="post">
+          <table>
+            <tr>
+              <td><label for="new-user">Username:<br/></label></td>
+              <td>
+                <input type="text" id="new-username" />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="new-email">Email (optional):</label></td>
+              <td><input type="text" id="new-email"/></td>
+            </tr>
+            <tr>
+              <td><label for="new-password">Password:</label></td>
+              <td>
+                <input type="password" name="password" id="new-password" value="" />
+                </td>
+              </tr>
+              <tr>
+                <td><label for="new-password-confirm">Confirm password:</label></td>
+                <td>
+                  <input type="password" id="new-password-confirm"/>
+                </td>
+
+              </tr>
+              <tr><td></td><td style="text-align:center">
+                <input type="submit" class="submit" value="Get started &raquo;"></input>
+              </td>
+            </tr>
+          </table>
+        </form>
+
+      </div>
+    </div>
+
+    <div id="signin-panel" class="dialog signin-panel" style="display:none">
+      <div class="contents">
+        <a href="#" class="x"></a>
+
+        <h3>Sign in</h3>
+        <form action="" id="signin-form" method="post">
+          <table>
+            <tr>
+              <td><label for="existing-username">Username<br/> (or email):</label></td>
+              <td>
+                <input type="text" id="existing-username"/>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="existing-password">Password:</label></td>
+              <td>
+                <input type="password" id="existing-password" />
+              </td>
+
+            </tr>
+            <tr><td></td><td style="text-align:center">
+              <input type="submit" class="submit" value="Sign in"></input>
+            </td></tr>
+          </table>
+        </form>
+
+      </div>
+    </div>
+</body>
+
+
+</html>

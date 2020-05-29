@@ -1,0 +1,421 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd">
+
+<!-- <html class="<%= "noteboard" if defined?(@is_noteboard)%> <%= "shared" if defined?(@shared) && @shared%>"> -->
+<html class="noteboard">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <title>Jjot</title>
+  </title>
+
+  <link rel="icon" href="/images/favicon.png" type="images/png" />
+
+  <script type="text/javascript">
+    var beganLoading = (new Date()).getTime();
+  </script>
+
+  <!-- <%= css_include_merged %> -->
+  <link rel="stylesheet" href="compiled/all_min.css" type="text/css" media="screen" />
+
+  <!--[if lt IE 8.]>
+      <link rel="stylesheet" href="stylesheets/ie.css" type="text/css" media="screen" />
+      <%= css_include("ie.css") %>
+  <![endif]-->
+  <!--[if lt IE 7.]>
+      <link rel="stylesheet" href="stylesheets/ie6.css" type="text/css" media="screen" />
+  <![endif]-->
+
+  <!-- <%= js_include_merged %> -->
+  <!-- <script type="text/javascript" src="compiled/all_min.js"></script> -->
+
+
+  <script src="javascripts/mootools.js"></script>
+  <script src="javascripts/jsext/lib/util.mootools.js"></script>
+  <script src="javascripts/jsext/lib/util.js"></script>
+  <script src="javascripts/jsext/lib/forms.js"></script>
+  <script src="javascripts/jsext/lib/util.dom.js"></script>
+  <script src="javascripts/jsext/lib/util.dombuilder.js"></script>
+  <script src="javascripts/jjot-util.js"></script>
+  <script src="javascripts/ui.js"></script>
+  <script src="javascripts/ui.dd.js"></script>
+  <script src="javascripts/rte.js"></script>
+  <script src="javascripts/rte.control.js"></script>
+  <script src="javascripts/note.js"></script>
+  <script src="javascripts/note.popout.js"></script>
+  <script src="javascripts/debug.js"></script>
+  <script src="javascripts/search.js"></script>
+  <script src="javascripts/archived.js"></script>
+  <script src="javascripts/autolink.js"></script>
+  <script src="javascripts/overlay.js"></script>
+  <script src="javascripts/messages.js"></script>
+  <script src="javascripts/rte.util.js"></script>
+  <script src="javascripts/stretchygrid.js"></script>
+  <script src="javascripts/rte.links.js"></script>
+  <script src="javascripts/modalDialog.js"></script>
+  <script src="javascripts/debug.console.js"></script>
+  <script src="javascripts/controls.tabpanel.js"></script>
+  <script src="javascripts/controls.filemenu.js"></script>
+  <script src="javascripts/rte.range.js"></script>
+  <script src="javascripts/rte.range.ie.js"></script>
+  <script src="javascripts/rte.control.js"></script>
+  <script src="javascripts/rte.undo.js"></script>
+
+  <!-- <%= yield :head %> -->
+
+  <script type="text/javascript">
+    Page.production = true;
+    Page.demo = true;
+    Page.user = "demo";
+    Page.userHasEmail = false;
+    Page.index= true; // <%= @index ? true : false %>;
+    Page.boardOwner= "demo"; //"<%= @board_owner_username%>";
+    Page.requestedNoteID=0;//"<%=@id%>";
+    Page.board = "Demo"; // "<%= @board.name %>";
+    Page.boardNumber = "0"; // "<%= @board_number %>";
+    Page.urlToBoard = "url_to_board"; // "<%= @board.url_to%>";
+    Page.boards= [];//<%= @user.boards.map{|b| {:number=>b.number,:name=>b.pretty_name}}.to_json %>;
+    Page.boardIdentifier=Page.boardOwner+"|"+Page.boardNumber;
+    Page.boardId = 0; // "<%= @board.id %>";
+    Page.shared = false; // <%= @board.user != @user %>;
+    Page.popout = false; // <%= @popout ? true : false %>;
+
+    window.addEvent('domready', Page.fullInit.bind(Page));
+
+  </script>
+
+
+</head>
+
+
+<body>
+  <div id="header-links">
+    <div>
+      <!-- <% unless request.request_uri.starts_with?("/accounts") %> -->
+      <span id="account-links">
+
+        <!-- <% if @user.demo? %> -->
+
+          <a href="#" id="sign-up">Free sign up</a>&nbsp;&nbsp;&nbsp;
+          <a href="#" id="sign-in">Sign in</a>
+          <script type="text/javascript"> Notes.queueStateChange=function(){} </script>
+
+      </span>
+      <!-- <% end %> -->
+
+      <span id="save-status"></span>
+    </div>
+  </div>
+
+  <div id="header">
+    <div id="top-half-padding">
+      <div id="top-half">
+        <h1><a href="/" title="Jjot - Take notes online, fast." class="no-focus-lines">Jjot</a></h1>
+        <div id="controls">
+
+
+
+
+          <!-- <%= yield :header %> -->
+
+
+          <table>
+            <tr>
+              <td><a href="#" id="new" title="New note (Shift+Ctrl+N)"><span class="unselectable">New</span></a></td>
+
+              <td valign="center" id="notesize">
+                <table>
+                  <tr>
+                    <td>
+                      <a href="#" class="bigger clicked" id="notesize-bigger"></a>
+                      <a href="#" class="smaller" id="notesize-smaller"></a>
+                    </td>
+                    <td><p>Note<br/>size</p></td>
+                  </tr>
+                </table>
+
+              </td>
+
+              <td class="last" style="white-space:nowrap">
+                <!-- Search this noteboard -->
+                <div id="find-form">
+                  <div id="search-box-wrapper">
+                    <input type="text" name="q" id="search"
+                    class="field blank" autocomplete="off" value="search"></input>
+                  </div>
+                  <input
+                  type="button" id="search-clear" name="search_clear" value="Clear"
+                    class="text button"></input>
+                </div>
+
+                <script type="text/javascript">
+                function searchFocusCheck(){
+                  if ($(this).hasClass("blank")){
+                    this.value="";
+                    $(this).removeClass("blank");
+                  }
+                };
+                $('search').addEvent("focus",searchFocusCheck);
+                </script>
+              </td>
+            </tr>
+          </table>
+
+
+
+        </div>
+      </div>
+    </div>
+    <div id="messages-box">
+      <div class="left-corner"><div class="right-corner"><div class="center">
+        <div id="status-message"></div>
+        <div id="search-message"></div>
+      </div></div></div>
+    </div>
+    <!-- <div id="white-fade"></div> -->
+
+  </div>
+
+
+  <div id="spacer"></div>
+  <div id="page-links">
+    <div id="share-message" >
+      <a href="#" class="section" id="share">
+        <span>Share</span> this noteboard
+      </a>
+    </div>
+
+    <a id="print" href="#" class="section">Print</a>
+    <a id="noteboard-options" class="section no-focus-lines" href="#">Noteboard options</a>
+                          <span id="last-save" style="display:none;">
+                              NaN
+                          </span>
+  </div>
+
+
+  <div id="content">
+    <div id="note-scroll">
+
+      <div id="sidebar">
+
+          <!-- <%= yield :sidebar %> -->
+
+        <h2 id="h-noteboards">Noteboards</h2>
+        <ol id="noteboards">
+        </ol>
+        <div id="create-noteboard">
+          <a href="#" class="unselectable">Create new board</a>
+        </div>
+
+        <div id="create-noteboard-ui" style="display:none">
+          <form id="create-noteboard-form" action="/main/createnoteboard" method="post">
+            Title: <input type="text" class="field" name="title" autocomplete="off"></input><br/>
+            <div class="buttons">
+              <input style="font-weight:bold" type="submit" class="submit" value="Create"></input>
+              <input type="button" class="cancel" value="Cancel"></input>
+            </div>
+          </form>
+        </div>
+        <br/>
+
+        <h2 id="h-archived">Archived notes</h2>
+        <ol id="archived">
+
+        </ol>
+        <div id="archived-nav"></div>
+
+
+        <div id="sidebar-footer">
+          <a id="keyboard-shortcuts" href="#" onclick="Page.showKeyboardShortcuts();return false;">Keyboard shortcuts</a><br/>
+
+          <a href="/about.html" title="Learn more">About</a>
+
+          <br/>
+
+          &copy;<span id="copyright" style="margin-right:0">2008</span> Jjot
+        </div>
+
+      </div>
+
+      <!-- <%= yield :body%> -->
+
+    <div id="note-area">
+
+
+      <div class="note notebox " id ="cnote1">
+        <div class="note_padding">
+          <div class="b1"><div class="b2"><div class="b3">
+            <div class="titlebar" id="cnote1_tb">
+              <div id="cnote1_buttons" class="buttons">
+                <a href="#" class="bold button"></a><a href="#" class="link button"></a>
+                <a href="#" class="bullets button"></a><a href="#" class="more button"></a>
+              </div>
+              <div class="metabuttons">
+                <a href="#" class="maximize button"></a><a href="#" class="delete button"></a>
+              </div>
+              <div id="cnote1_drag" class="drag"></div>
+            </div>
+            <div class="titlebar-divider"></div>
+            <div class="editor-parent">
+              <textarea id="note1" name="elmnote1" rows="10" cols="40">
+<p class="title">Jjot helps you take online notes</p>
+<p>Think of it as online sticky notes. They're simple, fast, and you can access them from any computer.</p>
+              </textarea>
+            </div>
+          </div></div></div>
+        </div>
+      </div>
+
+
+      <div class="note notebox" id ="cnote2">
+        <div class="note_padding">
+          <div class="b1"><div class="b2"><div class="b3">
+            <div class="titlebar" id="cnote2_tb">
+              <div id="cnote2_buttons" class="buttons">
+                <a href="#" class="bold button"></a><a href="#" class="link button"></a>
+                <a href="#" class="bullets button"></a><a href="#" class="more button"></a>
+              </div>
+              <div class="metabuttons">
+                <a href="#" class="maximize button"></a><a href="#" class="delete button"></a>
+              </div>
+              <div id="cnote2_drag" class="drag"></div>
+            </div>
+            <div class="titlebar-divider"></div>
+            <div class="editor-parent">
+              <textarea id="note2" name="elmnote1" rows="10" cols="40">
+<p class="title">What can I do with Jjot?</p>
+<ul><li>Jot down meeting notes, todo lists, or web research</li>
+<li><span style='font-weight:bold'>Share</span> them &mdash; with just a few people, or with everyone</li>
+<li><span style='font-weight:bold'>Print</span> them &mdash; take your notes with you in your pocket</li></ul><br/>
+              </textarea>
+            </div>
+          </div></div></div>
+        </div>
+      </div>
+
+
+      <div class="note notebox" id ="cnote3">
+        <div class="note_padding">
+          <div class="b1"><div class="b2"><div class="b3">
+            <div class="titlebar" id="cnote3_tb">
+              <div id="cnote3_buttons" class="buttons">
+                <a href="#" class="bold button"></a><a href="#" class="link button"></a>
+                <a href="#" class="bullets button"></a><a href="#" class="more button"></a>
+              </div>
+              <div class="metabuttons">
+                <a href="#" class="maximize button"></a><a href="#" class="delete button"></a>
+              </div>
+              <div id="cnote3_drag" class="drag"></div>
+            </div>
+            <div class="titlebar-divider"></div>
+            <div class="editor-parent">
+              <textarea id="note3" name="elmnote1" rows="10" cols="40">
+<p class="title">This is a note</p>
+<p>You can type in it, drag it around, make links, or delete it. Give it a try.</p><p>&nbsp;</p>
+<p>To save your notes permanently, sign up for an account. It's free and takes only seconds.</p>
+              </textarea>
+            </div>
+          </div></div></div>
+        </div>
+      </div>
+
+
+    </div>
+
+    </div>
+
+  </div>
+
+
+  </div>
+
+  <div id="debug-panel" style="display:none">
+    <div style="position:relative">
+      <a href="#" class="close" onclick="return Debug.close();">X</a>
+      <div id="debug-tabs">
+      </div>
+
+      <div id="debug-options" style="display:none">
+        <a href="#" id="hide-debug-options">&gt;</a>
+      </div>
+
+    </div>
+  </div>
+  <div id="dialogs">
+
+    <div id="signup-panel" class="dialog signin-panel" style="display:none" >
+      <div class="contents">
+        <a href="#" class="x"></a>
+
+        <h3>Sign up</h3>
+        <form action="#" id="signup-form" method="post">
+          <table>
+            <tr>
+              <td><label for="new-user">Username:<br/></label></td>
+              <td>
+                <input type="text" id="new-username" />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="new-email">Email (optional):</label></td>
+              <td><input type="text" id="new-email"/></td>
+            </tr>
+            <tr>
+              <td><label for="new-password">Password:</label></td>
+              <td>
+                <input type="password" name="password" id="new-password" value="" />
+                </td>
+              </tr>
+              <tr>
+                <td><label for="new-password-confirm">Confirm password:</label></td>
+                <td>
+                  <input type="password" id="new-password-confirm"/>
+                </td>
+
+              </tr>
+              <tr><td></td><td style="text-align:center">
+                <input type="submit" class="submit" value="Get started &raquo;"></input>
+              </td>
+            </tr>
+          </table>
+        </form>
+
+      </div>
+    </div>
+
+    <div id="signin-panel" class="dialog signin-panel" style="display:none">
+      <div class="contents">
+        <a href="#" class="x"></a>
+
+        <h3>Sign in</h3>
+        <form action="" id="signin-form" method="post">
+          <table>
+            <tr>
+              <td><label for="existing-username">Username<br/> (or email):</label></td>
+              <td>
+                <input type="text" id="existing-username"/>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="existing-password">Password:</label></td>
+              <td>
+                <input type="password" id="existing-password" />
+              </td>
+
+            </tr>
+            <tr><td></td><td style="text-align:center">
+              <input type="submit" class="submit" value="Sign in"></input>
+            </td></tr>
+          </table>
+        </form>
+        <script type="text/javascript">
+        new Forms.EnhancedForm("signin-form",{
+            submit:jjotutil.alterSubmitUrl.pass(["/signin/","existing-username"])
+        });
+        </script>
+
+      </div>
+    </div>
+</body>
+
+
+</html>

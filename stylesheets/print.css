@@ -1,0 +1,114 @@
+/* 
+this is used to print when the user invokes file -> print. It also formats the print
+preview page, when we want to print a noteboard or a single note.
+*/
+body,html{ margin:0; padding:0;}
+body{
+	font-family:Verdana, Helvetica, Arial, Sans;
+	font-size:90%;
+	margin:	20px;
+	margin-top:5px;
+}
+
+img{border:0;}
+#print-body{
+	min-width:600px;
+	max-width:900px;
+}
+
+#header{
+	margin-top:0;
+
+	/* needed for firefox top-margin bug. Needs to be white for IE6 */
+	border-top:1px solid white;
+
+	position:relative;
+	padding-bottom:10px;
+	margin-bottom:12px;
+
+}
+#header-contents{
+	margin-top:4px;
+	/*		text-align:right;*/
+}
+h1{
+	font-size:200%;
+	font-weight:normal;
+
+	margin:0;
+	margin-bottom:5px;
+}
+#messages{
+	font-size:90%;
+}
+
+#logo{
+	border-right:1px solid gray;
+	margin-top:3px;
+	margin-right:10px;
+	width:103px;
+	height:70px;	/* makes the gray line a bit shorter */
+
+	display:block;
+	float:left;
+
+/*	background: transparent url(/images/print-logo.png) no-repeat 0 0;*/
+
+}
+.right{
+	border-left:1px solid gray;
+	padding-left:10px;
+	background: transparent url(/images/print-logo.png) no-repeat 10px 0;	
+}
+
+/* mainly to warn you that printing the demo noteboard won't reflect your changes */
+#notification-message{
+	color:#EB7100;
+}
+
+.note{
+
+	margin-bottom:15px;	
+	border:1px solid #DEDEDE;
+	border:1px solid #e4e4e4;
+
+	border-right:2px solid #ddd;
+	border-bottom:2px solid #ddd;
+	clear:both;
+}
+.note .b1{
+	border:1px solid #888;
+	border-right:1px solid #666;
+	border-bottom:1px solid #666;
+	padding:5px;
+	padding-top:3px;
+}
+
+p{
+	margin:0;	
+}
+ul,ol{
+	padding-left:24px;
+}
+li{
+}
+
+.title{font-size:1.2em;color:#005eAD;}
+
+.link-caption{
+	/*	color:#555555;*/
+	font-size:90%;
+}
+
+a, a:visited{
+	color:#0068ca;
+	color:blue;
+}
+
+/* we want to generally avoid breaking notes across pages, but we only do this for notes that aren't
+* exceptionally tall. We figure that out in javascript */
+.dont-break{
+	/* opera is the only one that supports this. Disabling for now, untested */
+	/*	page-break-inside:avoid;*/
+	/* orphans would be a good property to use, but it's css3 */
+}

@@ -1,0 +1,126 @@
+
+
+
+
+
+*>.white-overlay {
+	filter:alpha(opacity=50);
+}
+
+div.menu {
+	overflow:visible;
+}
+
+
+input.button {
+    padding: 0 .3em;
+    overflow:visible;
+}
+
+
+
+.field {
+	width:150px;
+	margin:-1px 0;
+}
+.checkbox {
+	margin:-4px;
+}
+
+
+
+
+
+#messages-box .center {
+	height:1.2em; 
+}
+
+
+#controls {
+	z-index:1;
+	position:relative;
+}
+
+#controls .menu {
+	top:0;
+}
+
+
+#search-box-wrapper {
+	padding-top:2px;
+}
+
+#white-fade {
+	display:none;
+}
+
+
+
+
+
+
+
+#new {
+	cursor:pointer;
+}
+
+#debug-panel {
+	position:absolute;
+	height:250px;
+	z-index:500;
+}
+
+
+
+#archived>li {
+	padding:2px 0;
+}
+#page-links .menu {
+	margin-top:2px;
+}
+
+
+.note {
+	background-color:white;
+}
+.transparent {
+	filter:alpha(opacity=40);	
+}
+.focused {
+	z-index:105;
+}
+.dialog-showing {
+	z-index:106;
+}
+
+.metabuttons a.button {
+  border:1px solid #F8EED6;
+}
+.buttons a.button {
+  border:1px solid #F8EED6;
+}
+
+.dragging {
+	background-color:transparent;
+}
+body.drag-cursor {
+	cursor:move;
+}
+#edit-link {
+	z-index:103;
+	margin-top:2px;
+}
+
+
+
+html.noteboard #note-scroll {
+	overflow-y:scroll;	
+	position:absolute;
+	width:100%;
+}
+
+html.noteboard *>#sidebar {
+	position:fixed;
+	left:0;
+	background-color:white;
+}

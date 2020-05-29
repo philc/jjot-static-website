@@ -1,0 +1,70 @@
+244a245
+> 				case 8: return 'whitespace'; //philc - comment nodes should be counted as whitespace/empty
+1920a1922
+> 			if (el.removeEvents)	// philc - Sometimes an empty/invalid $(element) makes it into the garbage
+3410a3413
+> 		this.editor = this.options.editor;	// philc
+3425a3429,3432
+> 		if (this.options.canceled){	// phic
+> 			this.options.canceled=false;
+> 			return;
+> 		}
+3440a3448,3451
+> 		if (this.editor)	// philc
+> 			rte.Events.addEvent("mousemove",this.bound.move);
+> 
+> 			
+3450a3462,3464
+> 			if (this.editor)
+> 				rte.Events.removeEvent('mousemove',this.bound.move);	// philc
+> 				
+3452a3467,3469
+> 			if (this.editor)
+> 				rte.Events.addEvent('mousemove',this.bound.move); // philc
+> 
+3460a3478,3483
+> 		if (event.event.relativeTo){	// philc
+> 			var el = $(event.event.relativeTo);
+> 			event.page.x+=el.getLeft();
+> 			event.page.y+=el.getTop();
+> 		}
+> 		
+3485a3509,3512
+> 
+> 		if (this.editor)	// philc
+> 			rte.Events.removeEvent('mousemove',this.bound.move);
+> 
+3566,3570c3593,3598
+< 		this.element.setStyles({
+< 			'top': top+'px',
+< 			'left': left+'px',
+< 			'position': this.position
+< 		});
+---
+> 		// this doesn't work in Opera. Maybe a newer mootools fixes this. Disabling for now. -philc
+> 		// this.element.setStyles({
+> 		// 	'top': top+'px',
+> 		// 	'left': left+'px',
+> 		// 	'position': this.position
+> 		// });
+4191a4220,4224
+> 		// philc: Enable seperate areas for the top and bottom.
+> 		// If they didn't provide an area for both top and bottom, use the same value for each
+> 		var topArea = $pick(this.options.topArea, this.options.area);
+> 		var bottomArea = $pick(this.options.bottomArea, this.options.area);
+> 		
+4194,4197c4227,4230
+< 			if (this.page[z] < (this.options.area + pos[z]) && el.scroll[z] != 0)
+< 				change[z] = (this.page[z] - this.options.area - pos[z]) * this.options.velocity;
+< 			else if (this.page[z] + this.options.area > (el.size[z] + pos[z]) && el.scroll[z] + el.size[z] != el.scrollSize[z])
+< 				change[z] = (this.page[z] - el.size[z] + this.options.area - pos[z]) * this.options.velocity;
+---
+> 			if (this.page[z] < (topArea + pos[z]) && el.scroll[z] != 0)
+> 				change[z] = (this.page[z] - topArea - pos[z]) * this.options.velocity;
+> 			else if (this.page[z] + bottomArea > (el.size[z] + pos[z]) && el.scroll[z] + el.size[z] != el.scrollSize[z])
+> 				change[z] = (this.page[z] - el.size[z] + bottomArea - pos[z]) * this.options.velocity;
+4198a4232,4235
+> 		
+> 		if (this.options.verticalOnly) 	// philc - disable horizontal scrolling
+> 			change.x=0;
+> 		

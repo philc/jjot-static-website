@@ -1,0 +1,91 @@
+
+
+.dialog .x {
+	font-size:1px;
+}
+
+
+.white-overlay {
+		background:none;
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/white50.png', sizingMethod='scale');
+}
+.overlay {
+	height:expression(this.parentNode.offsetHeight+"px");
+}
+
+div.menu {
+	overflow:hidden;
+}
+
+
+.field-wrap {
+	display:inline;
+}
+
+
+
+.signin-panel {
+	position:absolute;
+}
+
+
+
+h1 a {
+	font-size:1px;
+	height:73px;
+}
+#header {
+	width:expression( document.body.clientWidth < (610) ? "610":"100%" );
+}
+html.noteboard #header {
+	width:expression( document.body.clientWidth < (920) ? "920":"100%" );
+}
+#page-links {
+	height:1em;	
+}
+#sidebar {
+	position:absolute;
+}
+#content {
+	z-index:100;
+}
+
+html.noteboard #note-scroll {
+	overflow:hidden;
+	height:auto;
+	position:static;
+	zoom:1;
+}
+
+#note-area {
+	position:relative;
+	overflow-y:scroll;
+	height:400px;
+}
+#search-message 	div#search-caption {
+	width:365px; 
+}
+a.share { font-size:1px; }
+
+
+ol#noteboards div.buttons {top:.25em;}
+
+
+
+
+
+
+div.menu ul {
+	overflow-x:hidden;
+}
+#find-form .menu {
+	margin-left:-2px;
+}
+
+#page-links .menu {
+	width:150px;
+}
+
+.editor-parent {
+	overflow:auto;
+}

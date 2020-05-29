@@ -1,0 +1,11 @@
+Javascripts
+===========
+
+Common javascript files
+
+They're not copied to the public/javascripts folder because then you wouldn't receive
+updates. Instead, you can serve them up from a javascripts controller which is installed
+when you install the plugin.
+
+Add this to your routes.rb file after installing:
+map.connect '/javascripts/*jsfile', :controller => 'javascripts'
